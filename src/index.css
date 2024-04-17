@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cellWidth: 33.33%;
+  --cellHeight: 100px;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-field {
+  width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+
+  .cell {
+    width: var(--cellWidth);
+    height: var(--cellHeight);
+    background: transparent;
+    outline: none;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-top: none;
+    border-left: none;
+    font-size: 55px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
