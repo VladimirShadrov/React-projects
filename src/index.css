@@ -14,9 +14,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 18px;
 }
 
-.game-field {
+.game {
+  display: flex;
+  width: 500px;
+  gap: 50px;
+}
+
+.game__status {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.game__field {
   width: 300px;
   display: flex;
   flex-wrap: wrap;
@@ -34,6 +46,16 @@ body {
     border-left: none;
     font-size: 55px;
     font-weight: bold;
-    cursor: pointer;
+  }
+}
+
+ol {
+  flex-grow: 1;
+  margin-top: 20px;
+
+  li {
+    button {
+      padding: 2px 6px;
+    }
   }
 }
