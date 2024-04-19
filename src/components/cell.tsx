@@ -1,26 +1,16 @@
 import React from 'react';
-import { useState } from 'react';
 
-// interface CellProps {
-//   value: string;
-// }
+interface CellProps {
+  value: string;
+  cellClickHandler: () => void;
+}
 
-// const Cell: React.FC<CellProps> = ({ value }) => {
-//   return <button className="cell">{value}</button>;
-// };
-
-// export default Cell;
-
-export default function Cell() {
-  const [value, setState] = useState('');
-
-  function cellClickHandler() {
-    setState('X');
-  }
-
+const Cell: React.FC<CellProps> = ({ value, cellClickHandler }): JSX.Element => {
   return (
-    <button className="cell" onClick={cellClickHandler}>
+    <button className="cell" onPointerDown={cellClickHandler}>
       {value}
     </button>
   );
-}
+};
+
+export default Cell;
