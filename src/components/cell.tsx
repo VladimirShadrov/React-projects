@@ -5,9 +5,9 @@ interface CellProps {
   cellClickHandler: () => void;
 }
 
-const Cell: React.FC<CellProps> = ({ value, cellClickHandler }): JSX.Element => {
+const Cell: React.FC<CellProps> = ({ value, cellClickHandler }) => {
   return (
-    <button className="cell" onPointerDown={cellClickHandler}>
+    <button className="cell" onClick={cellClickHandler}>
       {value}
     </button>
   );
