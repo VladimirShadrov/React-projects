@@ -1,26 +1,27 @@
-export default function App() {
-  // const myObj = {
-  //   description: 'Моя вторая задача',
-  //   status: 'Новая',
-  //   task_title: 'Задача 2',
-  // };
-  async function fetchData() {
-    const response = await fetch('https://aacceayuhyrqxhtdbfli.supabase.co/rest/v1/pomodoro', {
-      headers: {
-        apikey:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFhY2NlYXl1aHlycXhodGRiZmxpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTM5NjcyMDksImV4cCI6MjAyOTU0MzIwOX0._xv368W0XrDkw1fmZtioW2PredTIDBcD_UC7PanJv_c',
-        'Content-Type': 'application/json',
-      },
-      method: 'GET',
-    });
-    const data = await response.json();
+import { useState } from 'react';
 
-    console.log('Data: ', data);
+export default function App() {
+  const [score, setScore] = useState(0);
+  function increase() {
+    if (score >= 5) {
+      return;
+    }
+
+    setScore(score + 1);
   }
 
-  fetchData();
-  console.log('Монтируюсь');
+  function decrease() {
+    if (score <= 0) {
+      return;
+    }
 
-  fetchData();
-  return <h1>Привет React</h1>;
+    setScore(score - 1);
+  }
+  return (
+    <div>
+      <h1>Hello, your score: {score} </h1>
+      <button onClick={increase}>Increase</button>
+      <button onClick={decrease}>Decrease</button>
+    </div>
+  );
 }
