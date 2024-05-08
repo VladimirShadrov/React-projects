@@ -1,0 +1,23 @@
+.post {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border: 2px solid green;
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 12px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .post__title {
+    margin-bottom: 12px;
+  }
+
+  .delete-btn {
+    padding: 4px 8px;
+    cursor: pointer;
+  }
+}
