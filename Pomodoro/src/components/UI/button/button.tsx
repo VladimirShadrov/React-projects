@@ -1,18 +1,16 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import classes from '../button/button.module.css';
 
 type ButtonProps = {
-  title: string;
   disabled: boolean;
-  action: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  children: ReactNode;
+  onClick: (event: React.MouseEvent) => void;
 };
 
-export default function MyButton({ options }: { options: ButtonProps }) {
-  const { title, disabled, action } = options;
-
+export default function MyButton({ children, ...props }: ButtonProps) {
   return (
-    <button disabled={disabled} onClick={(event) => action(event)} className={classes.myButton}>
-      {title}
+    <button {...props} className={classes.myButton}>
+      {children}
     </button>
   );
 }
