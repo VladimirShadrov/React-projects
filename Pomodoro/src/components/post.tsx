@@ -1,7 +1,7 @@
 import '../styles/post.css';
 
 type PostConfig = {
-  post: {
+  postData: {
     id: number;
     title: string;
     body: string;
@@ -9,14 +9,14 @@ type PostConfig = {
   number: number;
 };
 
-export default function MyPost({ props }: { props: PostConfig }) {
-  const { title, body } = props.post;
+export default function MyPost({ number, postData }: PostConfig) {
+  const { title, body } = postData;
 
   return (
     <div className="post">
       <div className="content">
         <h2 className="title">
-          {props.number}. {title}
+          {number}. {title}
         </h2>
         <p className="description">{body}</p>
       </div>

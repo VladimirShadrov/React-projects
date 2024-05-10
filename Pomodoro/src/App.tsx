@@ -10,7 +10,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <PostList postListData={{ title: 'Заголовок списка постов', posts }} />
+      <PostList title={'Заголовок списка постов'} posts={posts} />
     </div>
   );
 }

@@ -12,14 +12,12 @@ type PostListConfig = {
   posts: PostConfig[];
 };
 
-export default function PostList({ postListData }: { postListData: PostListConfig }) {
-  const { title, posts } = postListData;
-
+export default function PostList({ title, posts }: PostListConfig) {
   return (
     <div className="post-list">
       <h1 className="post-list__title">{title}</h1>
       {posts.map((post, index) => (
-        <MyPost props={{ number: index + 1, post }} key={post.id} />
+        <MyPost number={index + 1} postData={post} key={post.id} />
       ))}
     </div>
   );
