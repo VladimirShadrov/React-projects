@@ -7,12 +7,12 @@ type PostConfig = {
   body: string;
 };
 
-type PostListConfig = {
+type PostListProps = {
   title: string;
   posts: PostConfig[];
 };
 
-export default function PostList({ title, posts }: PostListConfig) {
+export default function PostList({ title, posts }: PostListProps): JSX.Element {
   return (
     <div className="post-list">
       <h1 className="post-list__title">{title}</h1>

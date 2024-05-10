@@ -1,6 +1,6 @@
 import '../styles/post.css';
 
-type PostConfig = {
+type PostProps = {
   postData: {
     id: number;
     title: string;
@@ -9,7 +9,7 @@ type PostConfig = {
   number: number;
 };
 
-export default function MyPost({ number, postData }: PostConfig) {
+export default function MyPost({ number, postData }: PostProps): JSX.Element {
   const { title, body } = postData;
 
   return (
