@@ -15,4 +15,11 @@
     line-height: 28px;
     margin-bottom: 8px;
   }
+
+  .delete-btn {
+    padding: 4px 12px;
+    font-size: 16px;
+    line-height: 20px;
+    cursor: pointer;
+  }
 }
