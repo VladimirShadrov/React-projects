@@ -26,7 +26,10 @@ export default function App() {
   return (
     <div className="app">
       <MyForm create={addNewPost} />
-      <PostList remove={removePost} title={'Заголовок списка постов'} posts={posts} />
-    </div>
+      {posts.length
+        ? <PostList remove={removePost} title={'Заголовок списка постов'} posts={posts} />
+        : <h2 className="empty-post-list" style={{ textAlign: 'center', fontSize: '26px', marginTop: '12px' }}>Посты не найдены</h2>
+      }
+    </div >
   );
 }
