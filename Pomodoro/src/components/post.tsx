@@ -1,4 +1,5 @@
 import '../styles/post.css';
+import MyButton from '../UI/button/button';
 
 type PostProps = {
   postData: {
@@ -7,10 +8,11 @@ type PostProps = {
     body: string;
   };
   number: number;
+  remove: (id: number) => void;
 };
 
-export default function MyPost({ number, postData }: PostProps): JSX.Element {
-  const { title, body } = postData;
+export default function MyPost({ number, postData, remove }: PostProps): JSX.Element {
+  const { title, body, id } = postData;
 
   return (
     <div className="post">
@@ -21,7 +23,7 @@ export default function MyPost({ number, postData }: PostProps): JSX.Element {
         <p className="description">{body}</p>
       </div>
       <div className="actions">
-        <button className="delete-btn">Удалить пост</button>
+        <MyButton onClick={() => remove(id)}>Удалить пост</MyButton>
       </div>
     </div>
   );

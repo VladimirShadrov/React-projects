@@ -10,14 +10,15 @@ type PostConfig = {
 type PostListProps = {
   title: string;
   posts: PostConfig[];
+  remove: (id: number) => void;
 };
 
-export default function PostList({ title, posts }: PostListProps): JSX.Element {
+export default function PostList({ title, posts, remove }: PostListProps): JSX.Element {
   return (
     <div className="post-list">
       <h1 className="post-list__title">{title}</h1>
       {posts.map((post, index) => (
-        <MyPost number={index + 1} postData={post} key={post.id} />
+        <MyPost remove={remove} number={index + 1} postData={post} key={post.id} />
       ))}
     </div>
   );
