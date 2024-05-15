@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import PostList from './components/postList';
 import MyForm from './components/form';
 import MySelect from './UI/select/select';
+import MyInput from './UI/input/inputText';
 
 type PostType = {
   id: number;
@@ -15,7 +16,19 @@ export default function App() {
     { id: 2, title: 'Что такое JS?', body: 'JS - это язык программирования' },
     { id: 3, title: 'Что такое Python?', body: 'Python - это тоже язык программирования' },
   ]);
-  const [sortType, setSortType] = useState('');
+  const [sortType, setSortType] = useState<'title' | 'body'>('title');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const sortedPosts = useMemo(() => {
+    if (sortType) {
+      return [...posts].sort((a, b) => a[sortType].localeCompare(b[sortType]));
+    }
+    return posts;
+  }, [posts, sortType]);
+
+  const sortedAndSearchedPosts = useMemo(() => {
+    return sortedPosts.filter(post => post[sortType].toLowerCase().includes(searchQuery.toLowerCase().trim()));
+  }, [sortedPosts, sortType, searchQuery]);
 
   const selectOptions = [
     { title: 'По названию', value: 'title' },
@@ -32,8 +45,6 @@ export default function App() {
 
   function sortPosts(sortType: 'title' | 'body') {
     setSortType(sortType);
-    setPosts([...posts].sort((a, b) => a[sortType].localeCompare(b[sortType])));
-
   }
 
   return (
@@ -47,9 +58,16 @@ export default function App() {
           options={selectOptions}
           defaultValue='Сортировать по:'
         />
+        <br />
+        <br />
+        <MyInput
+          value={searchQuery}
+          placeholder={'Поиск...'}
+          onChange={(event) => setSearchQuery(event.target.value)}
+        />
       </div>
-      {posts.length
-        ? <PostList remove={removePost} title={'Заголовок списка постов'} posts={posts} />
+      {sortedAndSearchedPosts.length
+        ? <PostList remove={removePost} title={'Заголовок списка постов'} posts={sortedAndSearchedPosts} />
         : <h2 className="empty-post-list" style={{ textAlign: 'center', fontSize: '26px', marginTop: '12px' }}>Посты не найдены</h2>
       }
     </div >
