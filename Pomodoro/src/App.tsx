@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import PostList from './components/postList';
 import MyForm from './components/form';
 import MyFilter from './components/filter';
+import MyModal from './UI/modal/modal';
+import MyButton from './UI/button/button';
 
 type PostType = {
   id: number;
@@ -22,6 +24,7 @@ export default function App() {
   ]);
 
   const [filter, setFilter] = useState<Filter>({ sortType: 'title', query: '' });
+  const [modalVisibility, setModalVisibility] = useState<boolean>(false);
 
   const sortedPosts = useMemo(() => {
     if (filter.sortType) {
@@ -37,6 +40,7 @@ export default function App() {
 
   function addNewPost(post: PostType) {
     setPosts([...posts, post]);
+    setModalVisibility(false);
   }
 
   function removePost(id: number) {
@@ -45,7 +49,10 @@ export default function App() {
 
   return (
     <div className="app">
-      <MyForm create={addNewPost} />
+      <MyButton onPointerDown={() => setModalVisibility(true)}>Добавить пост</MyButton>
+      <MyModal visible={modalVisibility} setVisible={setModalVisibility}>
+        <MyForm create={addNewPost} />
+      </MyModal>
       <hr style={{ margin: '12px 0' }} />
       <MyFilter filter={filter} setFilter={setFilter} />
       <PostList remove={removePost} title={'Заголовок списка постов'} posts={sortedAndSearchedPosts} />
