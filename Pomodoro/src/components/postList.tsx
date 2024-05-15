@@ -1,5 +1,6 @@
 import MyPost from './post';
 import '../styles/postList.css';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 type PostConfig = {
   id: number;
@@ -21,9 +22,18 @@ export default function PostList({ title, posts, remove }: PostListProps): JSX.E
   return (
     <div className="post-list">
       <h1 className="post-list__title">{title}</h1>
-      {posts.map((post, index) => (
-        <MyPost remove={remove} number={index + 1} postData={post} key={post.id} />
-      ))}
+      <TransitionGroup>
+
+        {posts.map((post, index) => (
+          <CSSTransition
+            key={post.id}
+            timeout={500}
+            classNames="post"
+          >
+            <MyPost remove={remove} number={index + 1} postData={post} />
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
     </div>
   );
 }
