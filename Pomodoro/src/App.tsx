@@ -48,10 +48,7 @@ export default function App() {
       <MyForm create={addNewPost} />
       <hr style={{ margin: '12px 0' }} />
       <MyFilter filter={filter} setFilter={setFilter} />
-      {sortedAndSearchedPosts.length
-        ? <PostList remove={removePost} title={'Заголовок списка постов'} posts={sortedAndSearchedPosts} />
-        : <h2 className="empty-post-list" style={{ textAlign: 'center', fontSize: '26px', marginTop: '12px' }}>Посты не найдены</h2>
-      }
+      <PostList remove={removePost} title={'Заголовок списка постов'} posts={sortedAndSearchedPosts} />
     </div >
   );
 }

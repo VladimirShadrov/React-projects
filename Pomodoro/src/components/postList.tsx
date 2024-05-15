@@ -14,6 +14,10 @@ type PostListProps = {
 };
 
 export default function PostList({ title, posts, remove }: PostListProps): JSX.Element {
+  if (!posts.length) {
+    return <h2 className="empty-post-list" style={{ textAlign: 'center', fontSize: '26px', marginTop: '12px' }}>Посты не найдены</h2>;
+  }
+
   return (
     <div className="post-list">
       <h1 className="post-list__title">{title}</h1>
