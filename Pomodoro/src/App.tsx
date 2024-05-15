@@ -1,13 +1,17 @@
 import { useMemo, useState } from 'react';
 import PostList from './components/postList';
 import MyForm from './components/form';
-import MySelect from './UI/select/select';
-import MyInput from './UI/input/inputText';
+import MyFilter from './components/filter';
 
 type PostType = {
   id: number;
   title: string;
   body: string;
+};
+
+type Filter = {
+  sortType: 'title' | 'body';
+  query: string;
 };
 
 export default function App() {
@@ -16,24 +20,20 @@ export default function App() {
     { id: 2, title: 'Что такое JS?', body: 'JS - это язык программирования' },
     { id: 3, title: 'Что такое Python?', body: 'Python - это тоже язык программирования' },
   ]);
-  const [sortType, setSortType] = useState<'title' | 'body'>('title');
-  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const [filter, setFilter] = useState<Filter>({ sortType: 'title', query: '' });
 
   const sortedPosts = useMemo(() => {
-    if (sortType) {
-      return [...posts].sort((a, b) => a[sortType].localeCompare(b[sortType]));
+    if (filter.sortType) {
+      return [...posts].sort((a, b) => a[filter.sortType].localeCompare(b[filter.sortType]));
     }
     return posts;
-  }, [posts, sortType]);
+  }, [posts, filter.sortType]);
 
   const sortedAndSearchedPosts = useMemo(() => {
-    return sortedPosts.filter(post => post[sortType].toLowerCase().includes(searchQuery.toLowerCase().trim()));
-  }, [sortedPosts, sortType, searchQuery]);
+    return sortedPosts.filter(post => post[filter.sortType].toLowerCase().includes(filter.query.toLowerCase().trim()));
+  }, [sortedPosts, filter.sortType, filter.query]);
 
-  const selectOptions = [
-    { title: 'По названию', value: 'title' },
-    { title: 'По описанию', value: 'body' },
-  ];
 
   function addNewPost(post: PostType) {
     setPosts([...posts, post]);
@@ -43,29 +43,11 @@ export default function App() {
     setPosts(posts.filter((post) => post.id !== id));
   }
 
-  function sortPosts(sortType: 'title' | 'body') {
-    setSortType(sortType);
-  }
-
   return (
     <div className="app">
       <MyForm create={addNewPost} />
       <hr style={{ margin: '12px 0' }} />
-      <div>
-        <MySelect
-          value={sortType}
-          callback={sortPosts}
-          options={selectOptions}
-          defaultValue='Сортировать по:'
-        />
-        <br />
-        <br />
-        <MyInput
-          value={searchQuery}
-          placeholder={'Поиск...'}
-          onChange={(event) => setSearchQuery(event.target.value)}
-        />
-      </div>
+      <MyFilter filter={filter} setFilter={setFilter} />
       {sortedAndSearchedPosts.length
         ? <PostList remove={removePost} title={'Заголовок списка постов'} posts={sortedAndSearchedPosts} />
         : <h2 className="empty-post-list" style={{ textAlign: 'center', fontSize: '26px', marginTop: '12px' }}>Посты не найдены</h2>
