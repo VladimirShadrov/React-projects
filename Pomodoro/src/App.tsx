@@ -5,6 +5,7 @@ import MyFilter from './components/filter';
 import MyModal from './UI/modal/modal';
 import MyButton from './UI/button/button';
 import { usePost } from './hooks/usePost';
+import axios from 'axios';
 
 type PostType = {
   id: number;
@@ -18,17 +19,16 @@ type Filter = {
 };
 
 export default function App() {
-  const [posts, setPosts] = useState([
-    { id: 1, title: 'Что такое React?', body: 'React - это JS библиотека' },
-    { id: 2, title: 'Что такое JS?', body: 'JS - это язык программирования' },
-    { id: 3, title: 'Что такое Python?', body: 'Python - это тоже язык программирования' },
-  ]);
+  const [posts, setPosts] = useState([] as PostType[]);
 
   const [filter, setFilter] = useState<Filter>({ sortType: 'title', query: '' });
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
   const sortedAndSearchedPosts = usePost(posts, filter.sortType, filter.query);
 
-
+  async function fetchPosts() {
+    const posts = await axios.get('https://jsonplaceholder.typicode.com/posts');
+    setPosts(posts.data);
+  }
 
   function addNewPost(post: PostType) {
     setPosts([...posts, post]);
@@ -41,7 +41,8 @@ export default function App() {
 
   return (
     <div className="app">
-      <MyButton onPointerDown={() => setModalVisibility(true)}>Добавить пост</MyButton>
+      <button onClick={fetchPosts}>GET POSTS</button>
+      <MyButton onClick={() => setModalVisibility(true)}>Добавить пост</MyButton>
       <MyModal visible={modalVisibility} setVisible={setModalVisibility}>
         <MyForm create={addNewPost} />
       </MyModal>

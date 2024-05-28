@@ -16,6 +16,10 @@
     margin-bottom: 8px;
   }
 
+  .actions {
+    flex-shrink: 0;
+  }
+
   .delete-btn {
     padding: 4px 12px;
     font-size: 14px;
