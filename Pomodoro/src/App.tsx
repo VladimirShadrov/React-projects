@@ -5,7 +5,8 @@ import MyFilter from './components/filter';
 import MyModal from './UI/modal/modal';
 import MyButton from './UI/button/button';
 import { usePost } from './hooks/usePost';
-import axios from 'axios';
+import PostSevice from './API/postService';
+import { MyLoader } from './UI/loader/loader';
 
 type PostType = {
   id: number;
@@ -24,10 +25,15 @@ export default function App() {
   const [filter, setFilter] = useState<Filter>({ sortType: 'title', query: '' });
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
   const sortedAndSearchedPosts = usePost(posts, filter.sortType, filter.query);
+  const [isPostLoading, setPostLoading] = useState(false);
 
   async function fetchPosts() {
-    const posts = await axios.get('https://jsonplaceholder.typicode.com/posts');
-    setPosts(posts.data);
+    setPostLoading(true);
+    const posts = await PostSevice.getAll();
+    setTimeout(() => {
+      setPosts(posts);
+      setPostLoading(false);
+    }, 1000);
   }
 
   useEffect(() => {
@@ -52,7 +58,12 @@ export default function App() {
       </MyModal>
       <hr style={{ margin: '12px 0' }} />
       <MyFilter filter={filter} setFilter={setFilter} />
-      <PostList remove={removePost} title={'Заголовок списка постов'} posts={sortedAndSearchedPosts} />
+      {
+        isPostLoading
+          ? <MyLoader />
+          : <PostList remove={removePost} title={'Заголовок списка постов'} posts={sortedAndSearchedPosts} />
+      }
+
     </div >
   );
 }
