@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import PostList from './components/postList';
 import MyForm from './components/form';
 import MyFilter from './components/filter';
 import MyModal from './UI/modal/modal';
 import MyButton from './UI/button/button';
+import { usePost } from './hooks/usePost';
 
 type PostType = {
   id: number;
@@ -25,17 +26,8 @@ export default function App() {
 
   const [filter, setFilter] = useState<Filter>({ sortType: 'title', query: '' });
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
+  const sortedAndSearchedPosts = usePost(posts, filter.sortType, filter.query);
 
-  const sortedPosts = useMemo(() => {
-    if (filter.sortType) {
-      return [...posts].sort((a, b) => a[filter.sortType].localeCompare(b[filter.sortType]));
-    }
-    return posts;
-  }, [posts, filter.sortType]);
-
-  const sortedAndSearchedPosts = useMemo(() => {
-    return sortedPosts.filter(post => post[filter.sortType].toLowerCase().includes(filter.query.toLowerCase().trim()));
-  }, [sortedPosts, filter.sortType, filter.query]);
 
 
   function addNewPost(post: PostType) {
