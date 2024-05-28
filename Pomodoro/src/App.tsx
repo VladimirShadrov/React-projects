@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PostList from './components/postList';
 import MyForm from './components/form';
 import MyFilter from './components/filter';
@@ -30,6 +30,11 @@ export default function App() {
     setPosts(posts.data);
   }
 
+  useEffect(() => {
+    fetchPosts();
+
+  }, []);
+
   function addNewPost(post: PostType) {
     setPosts([...posts, post]);
     setModalVisibility(false);
@@ -41,7 +46,6 @@ export default function App() {
 
   return (
     <div className="app">
-      <button onClick={fetchPosts}>GET POSTS</button>
       <MyButton onClick={() => setModalVisibility(true)}>Добавить пост</MyButton>
       <MyModal visible={modalVisibility} setVisible={setModalVisibility}>
         <MyForm create={addNewPost} />
