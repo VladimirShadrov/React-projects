@@ -21,6 +21,7 @@ export default function App() {
         <Route path='/posts' element={<Posts />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
+      <Outlet />
     </StrictMode >
 
   );
