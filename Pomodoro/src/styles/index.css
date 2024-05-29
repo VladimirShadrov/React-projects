@@ -6,8 +6,35 @@
   line-height: 24px;
 }
 
-.app {
+.posts {
   max-width: 1000px;
   margin: 0 auto;
   padding: 18px 12px;
+}
+
+.navbar {
+  padding: 12px;
+  background: lightgray;
+}
+
+.links-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  transition: all 0.2s;
+
+  &.active {
+    color: gray;
+  }
+
+  &:hover {
+    color: gray;
+  }
 }
