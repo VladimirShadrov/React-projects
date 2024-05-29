@@ -1,18 +1,20 @@
 import { useState } from 'react';
-type FetchingReturn = [
-  () => Promise<void>,
+
+type FetchingReturn<T extends (...args) => void> = [
+  (...args: Parameters<T>) => Promise<void>,
   boolean,
   string
 ];
 
-export const useFetching = (callback: () => void): FetchingReturn => {
+export const useFetching = (callback: (...args) => void): FetchingReturn => {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
-  async function fetchingData() {
+  async function fetchingData(...args: number[]) {
+
     try {
       setLoading(true);
-      await callback();
+      await callback(...args);
 
     } catch (e) {
       setError(e.message);

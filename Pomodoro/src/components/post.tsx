@@ -11,14 +11,14 @@ type PostProps = {
   remove: (id: number) => void;
 };
 
-export default function MyPost({ number, postData, remove }: PostProps): JSX.Element {
+export default function MyPost({ postData, remove }: PostProps): JSX.Element {
   const { title, body, id } = postData;
 
   return (
     <div className="post">
       <div className="content">
         <h2 className="title">
-          {number}. {title}
+          {id}. {title}
         </h2>
         <p className="description">{body}</p>
       </div>
