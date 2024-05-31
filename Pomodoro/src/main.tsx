@@ -7,6 +7,7 @@ import About from './pages/about';
 import Posts from './pages/posts';
 import Home from './pages/home';
 import NotFound from './pages/notFound';
+import PostIdPage from './pages/postIdPage.tsx';
 
 
 const router = createBrowserRouter([
@@ -27,9 +28,14 @@ const router = createBrowserRouter([
         element: <Posts />
       },
       {
+        path: '/posts/:id',
+        element: <PostIdPage />
+      },
+      {
         path: '*',
         element: <NotFound />
       },
+
     ]
   }
 ]);
