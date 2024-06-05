@@ -4,7 +4,8 @@ import App from '../App.tsx';
 import About from '../pages/about.tsx';
 import Posts from '../pages/posts.tsx';
 import PostIdPage from '../pages/postIdPage.tsx';
-
+import AuthPage from '../pages/authPage.tsx';
+import RequireRoutes from './requireRoutes.tsx';
 
 export const routes = [
   {
@@ -13,24 +14,28 @@ export const routes = [
     children: [
       {
         path: '/',
-        element: <Home />
+        element: <RequireRoutes><Home /></RequireRoutes>
       },
       {
         path: '/about',
-        element: <About />
+        element: <RequireRoutes><About /></RequireRoutes>
       },
       {
         path: '/posts',
-        element: <Posts />
+        element: <RequireRoutes><Posts /></RequireRoutes>
       },
       {
         path: '/posts/:id',
-        element: <PostIdPage />
+        element: <RequireRoutes><PostIdPage /></RequireRoutes>
       },
       {
         path: '*',
         element: <NotFound />
       },
+      {
+        path: '/auth',
+        element: <AuthPage />
+      }
     ]
-  }
+  },
 ];

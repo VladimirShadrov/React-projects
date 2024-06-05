@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { MyLoader } from '../UI/loader/loader';
 
 
-
 const PostIdPage = () => {
   const params = useParams();
   const [post, setPost] = useState<{ id: number | null, title: string; }>({ id: null, title: '' });
