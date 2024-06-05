@@ -1,3 +1,4 @@
-import { createContext } from 'react';
+import { SetStateAction, createContext } from 'react';
 
-export const AuthContext = createContext({});
+const context: { isAuth?: boolean, setIsAuth?: SetStateAction<boolean>; } = {};
+export const AuthContext = createContext(context);

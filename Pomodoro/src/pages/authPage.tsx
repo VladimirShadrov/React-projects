@@ -10,8 +10,10 @@ const AuthPage = () => {
 
   function login(event: FormEvent) {
     event.preventDefault();
-    setIsAuth(true);
-    navigate('/posts');
+    if (!isAuth) {
+      setIsAuth(true);
+      navigate('/posts');
+    }
 
   }
 
