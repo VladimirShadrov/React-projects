@@ -11,7 +11,7 @@ const AuthPage = () => {
   function login(event: FormEvent) {
     event.preventDefault();
     setIsAuth(true);
-    navigate('/');
+    navigate('/posts');
 
   }
 
