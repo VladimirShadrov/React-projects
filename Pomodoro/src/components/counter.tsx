@@ -30,9 +30,7 @@ const Counter = () => {
   };
 
   const renderTags = () => {
-    return tags.length > 0
-      ? tags.map(tag => <li key={tag} className='btn btn-primary btn-sm m-2' onClick={() => handleTagChange(tag)}>{tag}</li>)
-      : 'No tags';
+    return tags.length !== 0 && tags.map(tag => <li key={tag} className='btn btn-primary btn-sm m-2' onClick={() => handleTagChange(tag)}>{tag}</li>);
   };
 
   if (tags.length) {
@@ -42,8 +40,16 @@ const Counter = () => {
   return (
     <>
       <span className={getBadgeClasses()}>{updateCount()}</span>
-      <button onPointerDown={handleIncrement} type="button" className='btn btn-primary btn-sm m-2'>+</button>
-      <button onPointerDown={handleDecrement} type="button" className='btn btn-primary btn-sm m-2'>-</button>
+      <button
+        onPointerDown={handleIncrement}
+        type="button"
+        className='btn btn-primary btn-sm m-2'
+      >+</button>
+      <button
+        onPointerDown={handleDecrement}
+        type="button"
+        className='btn btn-primary btn-sm m-2'
+      >-</button>
     </>
 
   );
