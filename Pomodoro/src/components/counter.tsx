@@ -1,37 +1,38 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 type CounterType = {
-  id?: number;
   value: number;
+  name: string;
 };
 
-const Counter = ({ value }: CounterType) => {
-  const [count, setCount] = useState<number>(value);
+const Counter = (props: CounterType) => {
+  const [value, setValue] = useState<number>(props.value);
 
   const handleIncrement = () => {
-    setCount(count + 1);
+    setValue(value + 1);
   };
 
   const handleDecrement = () => {
-    if (count === 0) {
+    if (value === 0) {
       return;
     }
-    setCount(count - 1);
+    setValue(value - 1);
   };
 
-  const updateCount = () => {
-    return count <= 0 ? 'Empty' : count;
+  const updateValue = () => {
+    return value <= 0 ? 'Empty' : value;
   };
 
   const getBadgeClasses = () => {
     let classes = 'badge m-2 ';
-    count <= 0 ? classes += 'text-bg-warning' : classes += 'text-bg-primary';
+    value <= 0 ? classes += 'text-bg-warning' : classes += 'text-bg-primary';
     return classes;
   };
 
   return (
-    <>
-      <span className={getBadgeClasses()}>{updateCount()}</span>
+    <div>
+      <span>{props.name}</span>
+      <span className={getBadgeClasses()}>{updateValue()}</span>
       <button
         onPointerDown={handleIncrement}
         type="button"
@@ -42,7 +43,7 @@ const Counter = ({ value }: CounterType) => {
         type="button"
         className='btn btn-primary btn-sm m-2'
       >-</button>
-    </>
+    </div>
 
   );
 };
