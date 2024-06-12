@@ -1,11 +1,11 @@
-import Counter from './components/counter';
+import CountersList from './components/countersList';
 
 
 const App = () => {
 
   return (
     <div>
-      <Counter />
+      <CountersList />
     </div>
   );
 };

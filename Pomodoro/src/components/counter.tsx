@@ -1,8 +1,12 @@
 import { useState } from 'react';
 
-const Counter = () => {
-  const [count, setCount] = useState<number>(0);
-  const [tags, setTags] = useState<string[]>(['tag1', 'tag2', 'tag3']);
+type CounterType = {
+  id?: number;
+  value: number;
+};
+
+const Counter = ({ value }: CounterType) => {
+  const [count, setCount] = useState<number>(value);
 
   const handleIncrement = () => {
     setCount(count + 1);
@@ -24,18 +28,6 @@ const Counter = () => {
     count <= 0 ? classes += 'text-bg-warning' : classes += 'text-bg-primary';
     return classes;
   };
-
-  const handleTagChange = (id: string) => {
-    setTags(tags.filter(tag => tag !== id));
-  };
-
-  const renderTags = () => {
-    return tags.length !== 0 && tags.map(tag => <li key={tag} className='btn btn-primary btn-sm m-2' onClick={() => handleTagChange(tag)}>{tag}</li>);
-  };
-
-  if (tags.length) {
-    return <ul>{renderTags()}</ul>;
-  }
 
   return (
     <>
