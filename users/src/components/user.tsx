@@ -1,3 +1,4 @@
+import Qualitie from './qualitie';
 import { UserType } from './users';
 
 
@@ -12,7 +13,7 @@ const User = ({ user, handleDelete }: UserProps) => {
     <tr key={user._id}>
       <td>{user.name}</td>
       <td>{
-        user.qualities.map(quality => <span key={quality._id} className={`badge text-bg-${quality.color} m-1`}>{quality.name}</span>)
+        user.qualities.map(quality => <Qualitie _id={quality._id} name={quality.name} color={quality.color} key={quality._id} />)
       }
       </td>
       <td>{user.profession.name}</td>
