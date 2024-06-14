@@ -12,11 +12,12 @@ export type UserType = {
 
 type UsersProps = {
   handleDelete: (id: string) => void;
+  onBookMark: (id: string) => void;
   users: UserType[];
 };
 
 
-const Users = ({ users, handleDelete }: UsersProps) => {
+const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
 
 
   return (
@@ -35,7 +36,7 @@ const Users = ({ users, handleDelete }: UsersProps) => {
         </thead>
         <tbody className='table-group-divider'>
           {
-            users.map(user => <User user={user} handleDelete={handleDelete} key={user._id} />)
+            users.map(user => <User user={user} handleDelete={handleDelete} onBookMark={onBookMark} key={user._id} />)
           }
         </tbody>
       </table>

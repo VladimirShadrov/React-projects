@@ -5,9 +5,16 @@ import { useState } from 'react';
 
 const App = () => {
   const [users, setUsers] = useState(api.users.fetchAll());
+  const usersDefault = [...users];
 
   const handleDelete = (id: string) => {
-    setUsers(users.filter(user => user._id !== id));
+    setUsers(usersDefault.filter(user => user._id !== id));
+  };
+
+  const handleBookMark = (id: string) => {
+    const index = usersDefault.findIndex(user => user._id === id);
+    usersDefault[index].bookmark = !usersDefault[index].bookmark;
+    setUsers(usersDefault);
   };
 
 
@@ -15,7 +22,7 @@ const App = () => {
   return (
     <>
       <SearchStatus value={users.length} />
-      <Users users={users} handleDelete={handleDelete} />
+      <Users users={users} handleDelete={handleDelete} onBookMark={handleBookMark} />
     </>
   )
     ;
