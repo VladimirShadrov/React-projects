@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import Pagination from './pagination';
 import User from './user';
 
 export type UserType = {
@@ -18,6 +20,15 @@ type UsersProps = {
 
 
 const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
+  const count = users.length;
+  const pageSize = 4;
+  const [currentPage, setCurrentPage] = useState(1);
+  const handlePageChange = (pageIndex: number) => {
+    console.log('Page: ', pageIndex);
+    setCurrentPage(pageIndex);
+
+  };
+
 
 
   return (
@@ -40,6 +51,7 @@ const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
           }
         </tbody>
       </table>
+      <Pagination itemsCount={count} pageSize={pageSize} onPageChange={handlePageChange} currentPage={currentPage} />
     </>
   );
 };

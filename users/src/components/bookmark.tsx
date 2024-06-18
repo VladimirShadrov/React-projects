@@ -13,7 +13,7 @@ const Bookmark = ({ id, onBookMark }: BookMarkType) => {
     setSelected(!selected);
   };
   return (
-    <button className="btn btn-outline-dark" onClick={handleBookMark}>
+    <button className="btn active" onClick={handleBookMark}>
       {
         selected
           ? <i className="bi bi-bookmark-heart-fill"></i>
