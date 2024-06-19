@@ -34,6 +34,7 @@ const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
   const pageSize = 4;
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [professions, setProfessions] = useState<ProfessionsType | null>(null);
+  const [selectedProf, setSelectedProf] = useState<ProfessionType | null>(null);
 
   useEffect(() => {
     api.professions.fetchAll().then((data) => setProfessions(data));
@@ -50,6 +51,8 @@ const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
 
   const handleProfessionSelect = (profession: ProfessionType) => {
     console.log('Profession: ', profession.name);
+    setSelectedProf(profession);
+
 
   };
 
@@ -59,7 +62,8 @@ const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
     <>
       <div style={{ display: 'flex', alignItems: 'flex-start' }}>
         {
-          professions && <GroupList professions={professions} onItemSelect={handleProfessionSelect} />
+          professions
+          && <GroupList professions={professions} onItemSelect={handleProfessionSelect} selectedProfession={selectedProf} />
         }
 
         <table className="table" style={{ display: users.length ? 'table' : 'none', flexGrow: 1 }}>
