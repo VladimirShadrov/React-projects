@@ -10,7 +10,7 @@ type GroupListProps = {
 const GroupList = ({ professions, selectedProfession, onItemSelect }: GroupListProps) => {
 
   return (
-    <ul className="list-group" style={{ width: '20%' }}>
+    <ul className="list-group">
       {
         Object.keys(professions).map((profession) =>
           <li

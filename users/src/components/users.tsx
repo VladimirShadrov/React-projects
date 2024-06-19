@@ -64,7 +64,10 @@ const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
       <div style={{ display: 'flex', alignItems: 'flex-start' }}>
         {
           professions
-          && <GroupList professions={professions} onItemSelect={handleProfessionSelect} selectedProfession={selectedProf} />
+          && (<div style={{ width: '20%' }}>
+            <GroupList professions={professions} onItemSelect={handleProfessionSelect} selectedProfession={selectedProf} />
+            <button className='btn btn-secondary mt-2 mb-2' onClick={() => setSelectedProf(null)}>Сбросить фильтры</button>
+          </div>)
         }
 
         <table className="table" style={{ display: users.length ? 'table' : 'none', flexGrow: 1 }}>
