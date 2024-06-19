@@ -1,19 +1,9 @@
-type Professions = {
-  [key: string]: { _id: string; name: string };
-};
+import { professions } from './professions.api';
 
 type Qualities = {
   [key: string]: { _id: string; name: string; color: string };
 };
 
-const professions: Professions = {
-  doctor: { _id: '67rdca3eeb7f6fgeed471818', name: 'Доктор' },
-  waiter: { _id: '67rdca3eeb7f6fgeed471820', name: 'Официант' },
-  physics: { _id: '67rdca3eeb7f6fgeed471814', name: 'Физик' },
-  engineer: { _id: '67rdca3eeb7f6fgeed471822', name: 'Инженер' },
-  actor: { _id: '67rdca3eeb7f6fgeed471824', name: 'Актер' },
-  cook: { _id: '67rdca3eeb7f6fgeed471829', name: 'Повар' },
-};
 const qualities: Qualities = {
   tedious: { _id: '67rdca3eeb7f6fgeed471198', name: 'Нудила', color: 'primary' },
   strange: { _id: '67rdca3eeb7f6fgeed471100', name: 'Странный', color: 'secondary' },
