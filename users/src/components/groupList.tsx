@@ -3,7 +3,7 @@ import { ProfessionsType } from './users';
 
 type GroupListProps = {
   professions: ProfessionsType;
-  selectedProfession: ProfessionType;
+  selectedProfession: ProfessionType | null;
   onItemSelect: (profession: ProfessionType) => void;
 };
 
@@ -15,7 +15,7 @@ const GroupList = ({ professions, selectedProfession, onItemSelect }: GroupListP
         Object.keys(professions).map((profession) =>
           <li
             key={professions[profession]._id}
-            className={"list-group-item" + (selectedProfession && selectedProfession._id === professions[profession]._id ? " active" : "")}
+            className={"list-group-item" + (selectedProfession === professions[profession] ? " active" : "")}
             onClick={() => onItemSelect(professions[profession])}
             role='button'
           >

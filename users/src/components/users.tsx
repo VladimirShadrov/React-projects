@@ -50,13 +50,14 @@ const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
   };
 
   const handleProfessionSelect = (profession: ProfessionType) => {
-    console.log('Profession: ', profession.name);
     setSelectedProf(profession);
-
-
   };
 
-  const cropUsersArray = paginate(users, pageSize, currentPage);
+
+  const filtredUsers = selectedProf
+    ? users.filter(user => user.profession === selectedProf)
+    : users;
+  const cropUsersArray = paginate(filtredUsers, pageSize, currentPage);
 
   return (
     <>
