@@ -24,12 +24,17 @@ const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
   const pageSize = 4;
   const [currentPage, setCurrentPage] = useState(1);
   const handlePageChange = (pageIndex: number) => {
-    console.log('Page: ', pageIndex);
     setCurrentPage(pageIndex);
+  };
+
+  const paginate = (users: UserType[], pageSize: number, pageNumber: number) => {
+    const startIndex = (pageNumber - 1) * pageSize;
+    return [...users].splice(startIndex, pageSize);
+
 
   };
 
-
+  const cropUsersArray = paginate(users, pageSize, currentPage);
 
   return (
     <>
@@ -47,7 +52,7 @@ const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
         </thead>
         <tbody className='table-group-divider'>
           {
-            users.map(user => <User user={user} handleDelete={handleDelete} onBookMark={onBookMark} key={user._id} />)
+            cropUsersArray.map(user => <User user={user} handleDelete={handleDelete} onBookMark={onBookMark} key={user._id} />)
           }
         </tbody>
       </table>
