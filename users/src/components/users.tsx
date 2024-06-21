@@ -69,6 +69,11 @@ const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
   const count = filtredUsers.length;
   const cropUsersArray = paginate(filtredUsers, pageSize, currentPage);
 
+  const handleSort = (item: string | number | boolean) => {
+    console.log('Prop: ', item);
+
+  };
+
   return (
     <>
       <SearchStatus value={count} />
@@ -85,7 +90,7 @@ const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
         {
           count > 0 &&
           <div style={{ flexGrow: 1 }}>
-            <UsersTable users={cropUsersArray} handleDelete={handleDelete} onBookMark={onBookMark} />
+            <UsersTable users={cropUsersArray} onSort={handleSort} handleDelete={handleDelete} onBookMark={onBookMark} />
             <div className='d-flex justify-content-center'>
               <Pagination itemsCount={count} pageSize={pageSize} onPageChange={handlePageChange} currentPage={currentPage} />
             </div>

@@ -15,19 +15,20 @@ type UsersTableTypes = {
   users: UserType[];
   handleDelete: (id: string) => void;
   onBookMark: (id: string) => void;
+  onSort: (item: string | number | boolean) => void;
 };
 
-const UsersTable = ({ users, ...rest }: UsersTableTypes) => {
+const UsersTable = ({ users, onSort, ...rest }: UsersTableTypes) => {
   return (
     <table className="table">
       <thead>
         <tr>
-          <th scope="col">Имя</th>
+          <th onClick={() => onSort('name')} scope="col">Имя</th>
           <th scope="col">Качества</th>
-          <th scope="col">Профессия</th>
-          <th scope="col">Встретился, раз</th>
-          <th scope="col">Оценка</th>
-          <th scope="col">Избранное</th>
+          <th onClick={() => onSort('profission.name')} scope="col">Профессия</th>
+          <th onClick={() => onSort('completedMeetings')} scope="col">Встретился, раз</th>
+          <th onClick={() => onSort('rate')} scope="col">Оценка</th>
+          <th onClick={() => onSort('bookmark')} scope="col">Избранное</th>
           <th scope="col"></th>
         </tr>
       </thead>
