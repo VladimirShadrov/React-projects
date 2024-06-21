@@ -3,6 +3,7 @@ import Pagination from './pagination';
 import User from './user';
 import GroupList from './groupList';
 import api from '../api';
+import SearchStatus from './searchStatus';
 
 export type UserType = {
   bookmark: boolean;
@@ -18,7 +19,7 @@ export type ProfessionType = {
   _id: string; name: string;
 };
 
-export type ProfessionsType = {
+export type ProfessionsObjectType = {
   [key: string]: { _id: string; name: string; };
 };
 
@@ -30,15 +31,18 @@ type UsersProps = {
 
 
 const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
-  const count = users.length;
   const pageSize = 4;
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [professions, setProfessions] = useState<ProfessionsType | null>(null);
+  const [professions, setProfessions] = useState<ProfessionsObjectType | ProfessionType[] | null>(null);
   const [selectedProf, setSelectedProf] = useState<ProfessionType | null>(null);
 
   useEffect(() => {
     api.professions.fetchAll().then((data) => setProfessions(data));
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedProf]);
 
   const handlePageChange = (pageIndex: number) => {
     setCurrentPage(pageIndex);
@@ -54,13 +58,21 @@ const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
   };
 
 
+
+
   const filtredUsers = selectedProf
-    ? users.filter(user => user.profession === selectedProf)
+    ? users.filter(user => JSON.stringify(user.profession) === JSON.stringify(selectedProf))
     : users;
+
+
+
+  const count = filtredUsers.length;
   const cropUsersArray = paginate(filtredUsers, pageSize, currentPage);
 
   return (
     <>
+      <SearchStatus value={count} />
+
       <div style={{ display: 'flex', alignItems: 'flex-start' }}>
         {
           professions
@@ -70,26 +82,34 @@ const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
           </div>)
         }
 
-        <table className="table" style={{ display: users.length ? 'table' : 'none', flexGrow: 1 }}>
-          <thead>
-            <tr>
-              <th scope="col">Имя</th>
-              <th scope="col">Качества</th>
-              <th scope="col">Профессия</th>
-              <th scope="col">Встретился, раз</th>
-              <th scope="col">Оценка</th>
-              <th scope="col">Избранное</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody className='table-group-divider'>
-            {
-              cropUsersArray.map(user => <User user={user} handleDelete={handleDelete} onBookMark={onBookMark} key={user._id} />)
-            }
-          </tbody>
-        </table>
-      </div>
-      <Pagination itemsCount={count} pageSize={pageSize} onPageChange={handlePageChange} currentPage={currentPage} />
+        {
+          count > 0 &&
+          <div style={{ flexGrow: 1 }}>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">Имя</th>
+                  <th scope="col">Качества</th>
+                  <th scope="col">Профессия</th>
+                  <th scope="col">Встретился, раз</th>
+                  <th scope="col">Оценка</th>
+                  <th scope="col">Избранное</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody className='table-group-divider'>
+                {
+                  cropUsersArray.map(user => <User user={user} handleDelete={handleDelete} onBookMark={onBookMark} key={user._id} />)
+                }
+              </tbody>
+            </table>
+
+            <div className='d-flex justify-content-center'>
+              <Pagination itemsCount={count} pageSize={pageSize} onPageChange={handlePageChange} currentPage={currentPage} />
+            </div>
+          </div>
+        }
+      </div >
     </>
   );
 };
