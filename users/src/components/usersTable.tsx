@@ -25,7 +25,7 @@ const UsersTable = ({ users, onSort, ...rest }: UsersTableTypes) => {
         <tr>
           <th onClick={() => onSort('name')} scope="col">Имя</th>
           <th scope="col">Качества</th>
-          <th onClick={() => onSort('profission.name')} scope="col">Профессия</th>
+          <th onClick={() => onSort('profession.name')} scope="col">Профессия</th>
           <th onClick={() => onSort('completedMeetings')} scope="col">Встретился, раз</th>
           <th onClick={() => onSort('rate')} scope="col">Оценка</th>
           <th onClick={() => onSort('bookmark')} scope="col">Избранное</th>

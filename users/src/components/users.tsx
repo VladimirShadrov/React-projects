@@ -4,6 +4,7 @@ import GroupList from './groupList';
 import api from '../api';
 import SearchStatus from './searchStatus';
 import UsersTable from './usersTable';
+import _ from 'lodash';
 
 export type UserType = {
   bookmark: boolean;
@@ -31,10 +32,11 @@ type UsersProps = {
 
 
 const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
-  const pageSize = 4;
+  const pageSize = 14;
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [professions, setProfessions] = useState<ProfessionsObjectType | ProfessionType[] | null>(null);
   const [selectedProf, setSelectedProf] = useState<ProfessionType | null>(null);
+  const [sortBy, setSortBy] = useState<{ iter: number | string | boolean; order: string; }>({ iter: 'name', order: 'asc' });
 
   useEffect(() => {
     api.professions.fetchAll().then((data) => setProfessions(data));
@@ -57,20 +59,24 @@ const Users = ({ users, handleDelete, onBookMark }: UsersProps) => {
     setSelectedProf(profession);
   };
 
-
-
-
   const filtredUsers = selectedProf
     ? users.filter(user => JSON.stringify(user.profession) === JSON.stringify(selectedProf))
     : users;
 
-
+  const sortedUsers = _.orderBy(filtredUsers, [sortBy.iter], [sortBy.order]);
 
   const count = filtredUsers.length;
-  const cropUsersArray = paginate(filtredUsers, pageSize, currentPage);
+  const cropUsersArray = paginate(sortedUsers, pageSize, currentPage);
 
   const handleSort = (item: string | number | boolean) => {
-    console.log('Prop: ', item);
+    if (sortBy.iter === item) {
+      setSortBy((prevstate) => ({
+        ...prevstate,
+        order: prevstate.order === 'asc' ? 'desc' : 'asc'
+      }));
+    } else {
+      setSortBy({ iter: item, order: 'asc' });
+    }
 
   };
 
