@@ -9,9 +9,6 @@ type GroupListProps = {
 
 const GroupList = ({ professions, selectedProfession, onItemSelect }: GroupListProps) => {
 
-  console.log('Proffess: ', professions);
-
-
   return (
     <ul className="list-group">
       {
