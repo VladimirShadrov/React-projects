@@ -12,8 +12,6 @@ const Board: React.FC<BoardProps> = ({ xIsNext, cells, onPlay }) => {
   const winner = checkWinner(cells);
   let status: string;
 
-  console.log(121);
-
   function handleCellClick(i: number) {
     if (winner || cells[i]) {
       return;
