@@ -27,8 +27,6 @@ const Board: React.FC<BoardProps> = ({ xIsNext, cells, onPlay }) => {
     onPlay(nextSquares);
   }
 
-  console.log(54);
-
   if (winner) {
     status = `Победил: ${winner}`;
   } else {
