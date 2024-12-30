@@ -44,3 +44,5 @@ const Board: React.FC<BoardProps> = ({ xIsNext, cells, onPlay }) => {
 };
 
 export default Board;
+
+console.log(124);
