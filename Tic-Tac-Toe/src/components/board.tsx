@@ -44,31 +44,3 @@ const Board: React.FC<BoardProps> = ({ xIsNext, cells, onPlay }) => {
 };
 
 export default Board;
-
-function printMessage(msg: string[] | number | boolean): void {
-  if (isStringArray(msg)) {
-    msg.forEach((message) => console.log(message)); // msg: string[]
-  } else if (isNumber(msg)) {
-    console.log(msg); // msg: number
-  } else if (isBoolean(msg)) {
-    console.log(msg); // msg: boolean
-  }
-}
-
-/**
- * Пользовательские функции
- */
-function isStringArray(arr: unknown): arr is string[] {
-  return Array.isArray(arr) && arr.every((item) => typeof item === 'string');
-}
-
-function isNumber(num: unknown): num is number {
-  return typeof num === 'number';
-}
-// num: number
-
-function isBoolean(bool: unknown): bool is boolean {
-  return typeof bool === 'boolean';
-}
-
-printMessage(24);
