@@ -44,29 +44,3 @@ const Board: React.FC<BoardProps> = ({ xIsNext, cells, onPlay }) => {
 };
 
 export default Board;
-
-/**
- * При получении элемента он может быть Element | null
- */
-const myButton = document.querySelector('.button'); // const myButton: Element | null
-
-/**
- * Сужение типов (Narrowing)
- */
-if (myButton) {
-  myButton.addEventListener('click', () => {}); // const myButton: Element
-} else if (myButton === null) {
-  throw new Error('Кнопка не найдена'); // const myButton: null
-} else {
-  myButton; // const myButton: never
-}
-
-/**
- * Type Guard - пользовательская функция
- * Проверяет что переменная el относится к типу Element
- */
-function isElement(el: Element | null): el is Element {
-  return el !== null;
-}
-
-isElement(myButton);
