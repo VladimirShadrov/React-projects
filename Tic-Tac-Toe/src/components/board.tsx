@@ -55,8 +55,10 @@ const myButton = document.querySelector('.button'); // const myButton: Element |
  */
 if (myButton) {
   myButton.addEventListener('click', () => {}); // const myButton: Element
-} else {
+} else if (myButton === null) {
   throw new Error('Кнопка не найдена'); // const myButton: null
+} else {
+  myButton; // const myButton: never
 }
 
 /**
