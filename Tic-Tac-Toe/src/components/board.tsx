@@ -53,10 +53,26 @@ interface Currencies {
   china: 'cny';
 }
 
+type CountriesUSAAndRussia = Extract<keyof Currencies, 'usa' | 'russia'>;
+
+// На выходе получим: type CountriesUSAAndRussia = "usa" | "russia"
+
+// /**
+//  * Выбирает (фильтрует) по набору свойств
+//  */
+// type CurrRusAndBelarus = Pick<Currencies, 'russia' | 'belarus'>;
+
+type CuntriesRusChinaBelarus = 'russia' | 'belarus' | 'china'; // Исходный тип
+
 /**
- * Выбирает (фильтрует) по набору свойств
+ * Извлекаем одно свойство
  */
-type CurrRusAndBelarus = Pick<Currencies, 'russia' | 'belarus'>;
+type China = Extract<CuntriesRusChinaBelarus, 'china'>; // type China = "china"
+
+/**
+ * Извлекаем несколько свойств
+ */
+type OnlyRussiaAndBelarus = Extract<CuntriesRusChinaBelarus, 'russia' | 'belarus'>; // type OnlyRussiaAndBelarus = "belarus" | "russia"
 
 /**
  * Исключение нескольких свойств из типа Currencies
