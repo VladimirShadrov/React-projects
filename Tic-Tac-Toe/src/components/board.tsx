@@ -46,39 +46,3 @@ const Board: React.FC<BoardProps> = ({ xIsNext, cells, onPlay }) => {
 export default Board;
 
 //=====================================
-interface Currencies {
-  russia: 'rur';
-  usa: 'usd';
-  belarus: 'rub';
-  china: 'cny';
-}
-
-type CountriesUSAAndRussia = Extract<keyof Currencies, 'usa' | 'russia'>;
-
-// На выходе получим: type CountriesUSAAndRussia = "usa" | "russia"
-
-// /**
-//  * Выбирает (фильтрует) по набору свойств
-//  */
-// type CurrRusAndBelarus = Pick<Currencies, 'russia' | 'belarus'>;
-
-type CuntriesRusChinaBelarus = 'russia' | 'belarus' | 'china'; // Исходный тип
-
-/**
- * Извлекаем одно свойство
- */
-type China = Extract<CuntriesRusChinaBelarus, 'china'>; // type China = "china"
-
-/**
- * Извлекаем несколько свойств
- */
-type OnlyRussiaAndBelarus = Extract<CuntriesRusChinaBelarus, 'russia' | 'belarus'>; // type OnlyRussiaAndBelarus = "belarus" | "russia"
-
-/**
- * Исключение нескольких свойств из типа Currencies
- */
-type CurrenciesWthoutUSA = Omit<Currencies, 'usa' | 'belarus' | 'china'>;
-
-// На выходе получим
-
-const a: CurrenciesWthoutUSA = {};
