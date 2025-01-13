@@ -45,34 +45,19 @@ const Board: React.FC<BoardProps> = ({ xIsNext, cells, onPlay }) => {
 
 export default Board;
 
-interface Car {
-  engine: string;
-  wheels: {
-    value: number;
-    type: string;
-  };
-}
-
-interface Ship {
-  engine: string;
-  sail: string;
-}
-
-function repairVehicle(vehicle: Car | Ship) {
-  if (isCar(vehicle)) {
-    console.log(vehicle.wheels.value); // vehicle: Car
-  } else {
-    console.log(vehicle); // vehicle: Ship
-  }
+//=====================================
+interface Currencies {
+  russia: 'rur';
+  usa: 'usd';
+  belarus: 'rub';
+  china: 'cny';
 }
 
 /**
- * Проверка на то, что тип аргумента - Car
- * приводим аргумент к нужному типу (в нашем случае Car)
- * и проверяем вложенное свойство на то, что оно не undefined
+ * Исключение свойства usa из типа Currencies
  */
-function isCar(car: unknown): car is Car {
-  return (car as Car).wheels.value !== undefined;
-}
+type CurrenciesWthoutUSA = Omit<Currencies, 'usa'>;
 
-repairVehicle();
+// На выходе получим
+
+const a: CurrenciesWthoutUSA = {};
