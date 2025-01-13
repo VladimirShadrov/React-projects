@@ -47,36 +47,38 @@ export default Board;
 
 //=====================================
 
-interface User {
+const myConst: (string | number | boolean)[] = [1, 'string', true];
+
+/**
+ * Если параметр функции является union типом
+ * для взаимодействия с ним нужно использовать сужение типов
+ */
+function myFunc(a: string | number | boolean): void {
+  if (typeof a === 'string') {
+    a.toLowerCase(); // string
+  } else if (typeof a === 'number') {
+    a.toFixed(); // number
+  } else {
+    console.log(a); // boolean
+  }
+}
+
+console.log(myConst);
+myFunc(false);
+
+type objType = {
   name: string;
   age: number;
-}
+  gender: string;
+};
 
-type required = Required<User>;
-/**
-  На выходе получаем:
-  type required = {
-    name: string;
-    age: number;
-}
- */
+type Role = {
+  role: string;
+};
 
-type readonly = Readonly<User>;
-/**
-  На выходе получаем
-  type readonly = {
-    readonly name: string;
-    readonly age: number;
-}
- */
-
-type partial = Partial<User>;
-
-/**
- На выходе получаем:
-
-  type partial = {
-      name?: string | undefined;
-      age?: number | undefined;
-  }
- */
+const myIntersection: objType & Role = {
+  age: 24,
+  gender: 'male',
+  name: 'Petya',
+  role: 'user',
+};
