@@ -54,9 +54,14 @@ interface Currencies {
 }
 
 /**
- * Исключение свойства usa из типа Currencies
+ * Выбирает (фильтрует) по набору свойств
  */
-type CurrenciesWthoutUSA = Omit<Currencies, 'usa'>;
+type CurrRusAndBelarus = Pick<Currencies, 'russia' | 'belarus'>;
+
+/**
+ * Исключение нескольких свойств из типа Currencies
+ */
+type CurrenciesWthoutUSA = Omit<Currencies, 'usa' | 'belarus' | 'china'>;
 
 // На выходе получим
 
