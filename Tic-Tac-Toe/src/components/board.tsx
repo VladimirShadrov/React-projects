@@ -46,3 +46,37 @@ const Board: React.FC<BoardProps> = ({ xIsNext, cells, onPlay }) => {
 export default Board;
 
 //=====================================
+
+interface User {
+  name: string;
+  age: number;
+}
+
+type required = Required<User>;
+/**
+  На выходе получаем:
+  type required = {
+    name: string;
+    age: number;
+}
+ */
+
+type readonly = Readonly<User>;
+/**
+  На выходе получаем
+  type readonly = {
+    readonly name: string;
+    readonly age: number;
+}
+ */
+
+type partial = Partial<User>;
+
+/**
+ На выходе получаем:
+
+  type partial = {
+      name?: string | undefined;
+      age?: number | undefined;
+  }
+ */
