@@ -47,24 +47,32 @@ export default Board;
 
 //=====================================
 
-const myConst: (string | number | boolean)[] = [1, 'string', true];
-
 /**
- * Если параметр функции является union типом
- * для взаимодействия с ним нужно использовать сужение типов
+ * Type allias для примитивов
  */
-function myFunc(a: string | number | boolean): void {
-  if (typeof a === 'string') {
-    a.toLowerCase(); // string
-  } else if (typeof a === 'number') {
-    a.toFixed(); // number
-  } else {
-    console.log(a); // boolean
-  }
+type UserNames = 'Петя' | 'Вася'; // Type allias
+
+function myFunc(name: UserNames): void {
+  console.log(`Hello ${name}`);
 }
 
-console.log(myConst);
-myFunc(false);
+myFunc('Петя');
+myFunc('Гриша'); // Ошибка, т.к. параметр может быть или 'Петя' или 'Вася'
+
+/**
+ * Type allias для объектов
+ */
+type User = {
+  name: string;
+  age: number;
+  skills: string;
+};
+
+const user: User = {
+  age: 25,
+  name: 'Вася',
+  skills: 'frontend',
+};
 
 type objType = {
   name: string;
@@ -76,9 +84,15 @@ type Role = {
   role: string;
 };
 
+/**
+ * Объединяем несколько типов для того,
+ * чтобы в объекте получить доступ к свойствам обоих типов
+ */
 const myIntersection: objType & Role = {
   age: 24,
   gender: 'male',
   name: 'Petya',
   role: 'user',
 };
+
+console.log(myIntersection);
