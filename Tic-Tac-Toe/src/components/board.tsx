@@ -46,14 +46,3 @@ const Board: React.FC<BoardProps> = ({ xIsNext, cells, onPlay }) => {
 export default Board;
 
 //=====================================
-
-// Вариант 2 с использованием типа
-type IUser = Record<string, string>;
-
-const user: IUser = {
-  name: 'Вова',
-  role: 'admin',
-  gender: 'male',
-};
-
-console.log(user);
