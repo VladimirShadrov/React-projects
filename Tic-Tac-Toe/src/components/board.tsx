@@ -47,17 +47,8 @@ export default Board;
 
 //=====================================
 
-// Здесть только type, т.к. интерфейс не позволит сделать такую запись
-type ID = string | number;
-type Protocol = 'http' | 'https';
-type Method = 'post' | 'get' | 'delete';
+// Два равнозначных способа типизации массива строк
+const numsArr: number[] = [1, 2, 3];
+const numsArr: Array<number> = [1, 2, 3];
 
-// Но в интерфейсе можно ссылаться на типы
-interface Config {
-  id: ID;
-  protocol: Protocol;
-  method: Method;
-  port: number;
-}
-
-const config: Config = {};
+console.log(numsArr);
