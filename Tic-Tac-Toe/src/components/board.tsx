@@ -46,60 +46,14 @@ const Board: React.FC<BoardProps> = ({ xIsNext, cells, onPlay }) => {
 export default Board;
 
 //=====================================
-interface IUser {
-  age: number;
-  name: string;
-  printUserInfo: (age: number, name: string) => void;
-}
 
-interface IUserRole {
-  role: string;
-}
+// Вариант 2 с использованием типа
+type IUser = Record<string, string>;
 
-/**
- * Объединяет в единый интерфейс свойства
- * интерфейсов IUser и IUserRole
- */
-interface IUserWithRole extends IUser, IUserRole {
-  /**
-   * Кроме того есть возможность задавать дополнительные свойства,
-   * которых нет в родительских интерфейсах
-   */
-  gender: string;
-}
-
-const user: IUserWithRole = {
-  age: 50,
+const user: IUser = {
   name: 'Вова',
-  printUserInfo: (age, name) => console.log(`Пользователю ${name} ${age} лет`),
-  role: 'user',
+  role: 'admin',
   gender: 'male',
 };
 
-user.printUserInfo(user.age, user.name);
-
-type User = {
-  name: string;
-  age: number;
-};
-
-type Gender = {
-  gender: string;
-};
-
-type Role = {
-  role: string;
-};
-
-// Объединяем в единый тип свойства типов User, Gender и Role
-type UserWithRoleAndGender = User & Gender & Role;
-
-// Объект, созданный на основе типа UserWithRoleAndGender
-const newUser: UserWithRoleAndGender = {
-  age: 24,
-  gender: 'male',
-  name: 'Sergey',
-  role: 'user',
-};
-
-console.log(newUser);
+console.log(user);
