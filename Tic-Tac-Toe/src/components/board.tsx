@@ -47,16 +47,17 @@ export default Board;
 
 //=====================================
 
-// Например мы импортируем этот интерфейс из сторонней библиотеки
-interface IUser {
-  age: number;
-  name: string;
+// Здесть только type, т.к. интерфейс не позволит сделать такую запись
+type ID = string | number;
+type Protocol = 'http' | 'https';
+type Method = 'post' | 'get' | 'delete';
+
+// Но в интерфейсе можно ссылаться на типы
+interface Config {
+  id: ID;
+  protocol: Protocol;
+  method: Method;
+  port: number;
 }
 
-// Есть возможнось расширить существующий дополнительным свойством
-interface IUser {
-  gender: string;
-}
-
-const user: IUser = {};
-console.log(user);
+const config: Config = {};
