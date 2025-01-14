@@ -46,3 +46,17 @@ const Board: React.FC<BoardProps> = ({ xIsNext, cells, onPlay }) => {
 export default Board;
 
 //=====================================
+
+// Например мы импортируем этот интерфейс из сторонней библиотеки
+interface IUser {
+  age: number;
+  name: string;
+}
+
+// Есть возможнось расширить существующий дополнительным свойством
+interface IUser {
+  gender: string;
+}
+
+const user: IUser = {};
+console.log(user);
