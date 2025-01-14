@@ -46,3 +46,17 @@ const Board: React.FC<BoardProps> = ({ xIsNext, cells, onPlay }) => {
 export default Board;
 
 //=====================================
+interface IUser {
+  age: number;
+  name: string;
+
+  printUserInfo: (age: number, name: string) => void;
+}
+
+const user: IUser = {
+  age: 50,
+  name: 'Вова',
+  printUserInfo: (age, name) => console.log(`Пользователю ${name} ${age} лет`),
+};
+
+user.printUserInfo(user.age, user.name);
