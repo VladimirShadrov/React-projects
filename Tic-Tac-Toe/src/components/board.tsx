@@ -47,19 +47,22 @@ export default Board;
 
 //=====================================
 
-function getData<T, U>(data: T, value: U): string {
-  switch (typeof data) {
-    case 'string':
-      return `Параметр ${data} имеет значение ${value}`;
-      break;
-    case 'number':
-      return `Параметр ${data} имеет значение ${value}`;
-      break;
-    default:
-      return 'Значение не известно';
-  }
+interface IInfoLogger {
+  log: <T>(info: T) => void;
 }
 
-// Вызов
-getData('Счетчик', 4);
-getData<string, number>('Counter', 28);
+// Вариант 1 с обычной фукнцией
+const logger: IInfoLogger = {
+  log(text) {
+    console.log(text);
+  },
+};
+
+// Вариант 2 Со стрелочной функцией (наиболее частый)
+const logger2: IInfoLogger = {
+  log: (text) => {
+    console.log(text);
+  },
+};
+
+console.log(logger, logger2);
