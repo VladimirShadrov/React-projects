@@ -18,3 +18,13 @@ export function checkWinner(cellData: string[]) {
   }
   return null;
 }
+
+// ===============================
+
+const foo1 = <T extends string | boolean>(data: T): T => {
+  return data;
+};
+
+function foo2<T extends boolean | number | string>(data: T): T {
+  return data;
+}
