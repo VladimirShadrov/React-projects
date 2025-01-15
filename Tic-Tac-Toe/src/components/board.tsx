@@ -47,22 +47,23 @@ export default Board;
 
 //=====================================
 
-interface IInfoLogger {
-  log: <T>(info: T) => void;
-}
-
-// Вариант 1 с обычной фукнцией
-const logger: IInfoLogger = {
-  log(text) {
-    console.log(text);
-  },
+type User<T> = {
+  name: string;
+  age: T;
 };
 
-// Вариант 2 Со стрелочной функцией (наиболее частый)
-const logger2: IInfoLogger = {
-  log: (text) => {
-    console.log(text);
-  },
+/**
+ * Для свойства age можно передать разные типы данных
+ * при одном объявлении типа User
+ */
+const user1: User<number> = {
+  name: 'Вова',
+  age: 50,
 };
 
-console.log(logger, logger2);
+const user2: User<string> = {
+  name: 'Вова',
+  age: '50',
+};
+
+console.log(user1, user2);
