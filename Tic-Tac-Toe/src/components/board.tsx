@@ -47,23 +47,10 @@ export default Board;
 
 //=====================================
 
-type User<T> = {
-  name: string;
-  age: T;
-};
+type ElementOrNull<T> = T | null;
+type OneOrMany<T> = T | T[];
 
-/**
- * Для свойства age можно передать разные типы данных
- * при одном объявлении типа User
- */
-const user1: User<number> = {
-  name: 'Вова',
-  age: 50,
-};
+const element: ElementOrNull<HTMLElement> = document.querySelector('.test'); // Вернет тип HTMLElement или null
+const data: OneOrMany<number> = [5]; // Можно присвоить как элемент заданного типа, так и массив элементов заданного типа
 
-const user2: User<string> = {
-  name: 'Вова',
-  age: '50',
-};
-
-console.log(user1, user2);
+console.log(element, data);
