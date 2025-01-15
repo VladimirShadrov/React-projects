@@ -47,29 +47,16 @@ export default Board;
 
 //=====================================
 
-interface IUser<ParentsData extends IUserParentsData> {
-  name: string;
-  age: number;
-  parents: ParentsData;
+function deposit<T extends string | number>(amount: T): string {
+  return `${amount}`;
 }
 
-interface IUserParentsData {
-  mother: string;
-  father: string;
-}
+deposit('200');
+deposit(200);
+deposit(false);
 
-/**
- * В качестве дженерика мы можем передать любой объект, но с условием,
- * он должен содержать 2 обязательных свойства как в интерфейсе IUserParentsData
- */
-const user: IUser<{ mother: string; father: string; isMarried: boolean }> = {
-  name: 'Name',
-  age: 26,
-  parents: {
-    mother: 'Mother name',
-    father: 'Father name',
-    isMarried: false,
-  },
+const foo2 = <T extends number>(amount: T): T => {
+  return amount;
 };
 
-console.log(user);
+foo2(2);
