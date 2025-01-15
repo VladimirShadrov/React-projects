@@ -47,10 +47,29 @@ export default Board;
 
 //=====================================
 
-type ElementOrNull<T> = T | null;
-type OneOrMany<T> = T | T[];
+interface IUser<ParentsData extends IUserParentsData> {
+  name: string;
+  age: number;
+  parents: ParentsData;
+}
 
-const element: ElementOrNull<HTMLElement> = document.querySelector('.test'); // Вернет тип HTMLElement или null
-const data: OneOrMany<number> = [5]; // Можно присвоить как элемент заданного типа, так и массив элементов заданного типа
+interface IUserParentsData {
+  mother: string;
+  father: string;
+}
 
-console.log(element, data);
+/**
+ * В качестве дженерика мы можем передать любой объект, но с условием,
+ * он должен содержать 2 обязательных свойства как в интерфейсе IUserParentsData
+ */
+const user: IUser<{ mother: string; father: string; isMarried: boolean }> = {
+  name: 'Name',
+  age: 26,
+  parents: {
+    mother: 'Mother name',
+    father: 'Father name',
+    isMarried: false,
+  },
+};
+
+console.log(user);
