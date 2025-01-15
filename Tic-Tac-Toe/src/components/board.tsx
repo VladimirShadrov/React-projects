@@ -47,8 +47,19 @@ export default Board;
 
 //=====================================
 
-// Два равнозначных способа типизации массива строк
-const numsArr: number[] = [1, 2, 3];
-const numsArr: Array<number> = [1, 2, 3];
+function getData<T, U>(data: T, value: U): string {
+  switch (typeof data) {
+    case 'string':
+      return `Параметр ${data} имеет значение ${value}`;
+      break;
+    case 'number':
+      return `Параметр ${data} имеет значение ${value}`;
+      break;
+    default:
+      return 'Значение не известно';
+  }
+}
 
-console.log(numsArr);
+// Вызов
+getData('Счетчик', 4);
+getData<string, number>('Counter', 28);
