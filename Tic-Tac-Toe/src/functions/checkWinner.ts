@@ -21,10 +21,38 @@ export function checkWinner(cellData: string[]) {
 
 // ===============================
 
-const foo1 = <T extends string | boolean>(data: T): T => {
-  return data;
-};
+class User<T, U> {
+  name: T;
+  age: U;
 
-function foo2<T extends boolean | number | string>(data: T): T {
-  return data;
+  constructor(name: T, age: U) {
+    this.name = name;
+    this.age = age;
+  }
+  getUserName<T>(surname: T): string {
+    if (typeof surname !== 'string') {
+      return `Имя пользователя: ${this.name}`;
+    } else {
+      return `Имя пользователя: ${this.name} ${surname}`;
+    }
+  }
 }
+
+const userMax = new User('Max', 24);
+userMax.getUserName('Ivanoff'); // Имя пользователя: Max Ivanoff
+
+class UserAdmin<T> extends User<string, string> {
+  role: T;
+  name: string;
+  age: string;
+
+  constructor(name: string, age: string, role: T) {
+    super(name, age);
+
+    this.name = name;
+    this.age = age;
+    this.role = role;
+  }
+}
+
+new UserAdmin();
