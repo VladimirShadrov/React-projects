@@ -44,19 +44,3 @@ const Board: React.FC<BoardProps> = ({ xIsNext, cells, onPlay }) => {
 };
 
 export default Board;
-
-//=====================================
-
-function deposit<T extends string | number>(amount: T): string {
-  return `${amount}`;
-}
-
-deposit('200');
-deposit(200);
-deposit(false);
-
-const foo2 = <T extends number>(amount: T): T => {
-  return amount;
-};
-
-foo2(2);
