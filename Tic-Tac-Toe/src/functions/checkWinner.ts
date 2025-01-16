@@ -21,23 +21,78 @@ export function checkWinner<T>(cellData: T[]) {
 
 // ===============================
 
-type Currencies = {
-  russia: 'rur';
-  usa: 'usd';
-  belarus: 'rub';
-  china: 'cny';
+function print<T>(msg: T): void {
+  console.log(msg);
+}
+
+interface Logger {
+  log: <T>(msg: T) => T;
+}
+
+const obj: Logger = {
+  log: (msg) => msg,
 };
 
-type CurBaseType = 'rus' | 'usa' | 'china' | 'belarus';
+obj.log('sdfsdfds');
+print('');
 
-type NoUSA = Omit<Currencies, 'usa'>;
-type OnlyRussia = Pick<Currencies, 'russia'>;
+type User<T> = {
+  name: string;
+  age: T;
+};
 
-type NoUSAType = Exclude<CurBaseType, 'usa'>;
-type NoUSAInterface = Exclude<keyof Currencies, 'usa'>;
+interface IUser<ParData extends IUserParents> {
+  name: string;
+  age: number;
+  parents: ParData;
+}
 
-type OnlyRusType = Extract<CurBaseType, 'rus'>;
-type OnlyRusType = Extract<keyof Currencies, 'russia'>;
+interface IUserParents {
+  mother: string;
+  father: string;
+}
 
-type P = Partial<Currencies>;
-type RO = Readonly<Currencies>;
+const user1: IUser<{ father: string; mother: string; isMarried: boolean }> = {
+  age: 33,
+  name: 'ksdf',
+  parents: {
+    father: '',
+    isMarried: false,
+    mother: '',
+  },
+};
+user1.age;
+
+function deposit<T extends string | number>(amount: T): void {
+  console.log(`Вы положили на счет: ${amount}`);
+}
+
+deposit(500);
+deposit('200');
+
+class User2<T, U> {
+  name: T;
+  age: U;
+
+  constructor(name: T, age: U) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+class Admin<T> extends User2<string, number> {
+  role: T;
+
+  constructor(name: string, age: number, role: T) {
+    super(name, age);
+    this.name = name;
+    this.age = age;
+    this.role = role;
+  }
+}
+
+const user = new User2<string, number>('Sam', 24);
+user.age;
+
+const admin = new Admin<string>('Max', 44, 'Admin');
+admin.name;
