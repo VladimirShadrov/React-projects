@@ -21,23 +21,18 @@ export function checkWinner<T>(cellData: T[]) {
 
 // ===============================
 
-function myNever(data: boolean): string {
-  if (data === true) {
-    return 'true';
-  } else if (data === false) {
-    return 'false';
-  } else {
-    data;
-    return '';
+function printMessage(msg: string[] | string | boolean | number): void {
+  if (isStringArray(msg)) {
+    msg.forEach((msg) => console.log(msg));
+  } else if (typeof msg === 'string') {
+    console.log(msg);
+  } else if (typeof msg === 'boolean') {
+    console.log(msg);
+  } else if (typeof msg === 'number') {
+    console.log(msg.toString());
   }
 }
 
-const btn = document.querySelector('.button');
-
-if (btn) {
-  btn.addEventListener('click', () => {});
-} else if (btn === null) {
-  throw new Error('Button not exist', btn);
-} else {
-  btn;
+function isStringArray(arr: unknown): arr is string[] {
+  return Array.isArray(arr) && arr.every((item) => typeof item === 'string');
 }
