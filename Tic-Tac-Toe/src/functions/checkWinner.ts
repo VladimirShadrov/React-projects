@@ -24,15 +24,27 @@ export function checkWinner<T>(cellData: T[]) {
 function printMessage(msg: string[] | string | boolean | number): void {
   if (isStringArray(msg)) {
     msg.forEach((msg) => console.log(msg));
-  } else if (typeof msg === 'string') {
+  } else if (isString(msg)) {
     console.log(msg);
-  } else if (typeof msg === 'boolean') {
+  } else if (isBoolean(msg)) {
     console.log(msg);
-  } else if (typeof msg === 'number') {
+  } else if (isNumber(msg)) {
     console.log(msg.toString());
   }
 }
 
 function isStringArray(arr: unknown): arr is string[] {
   return Array.isArray(arr) && arr.every((item) => typeof item === 'string');
+}
+
+function isString(msg: unknown): msg is string {
+  return typeof msg === 'string';
+}
+
+function isBoolean(msg: unknown): msg is boolean {
+  return typeof msg === 'boolean';
+}
+
+function isNumber(msg: unknown): msg is number {
+  return typeof msg === 'number';
 }
