@@ -1,4 +1,4 @@
-export function checkWinner(cellData: string[]) {
+export function checkWinner<T>(cellData: T[]) {
   const winVariants = [
     [0, 1, 2],
     [3, 4, 5],
@@ -21,38 +21,20 @@ export function checkWinner(cellData: string[]) {
 
 // ===============================
 
-class User<T, U> {
-  name: T;
-  age: U;
-
-  constructor(name: T, age: U) {
-    this.name = name;
-    this.age = age;
-  }
-  getUserName<T>(surname: T): string {
-    if (typeof surname !== 'string') {
-      return `Имя пользователя: ${this.name}`;
-    } else {
-      return `Имя пользователя: ${this.name} ${surname}`;
+async function foo() {
+  try {
+    const resp = await fetch('');
+    const data = await resp.json();
+  } catch (e: unknown) {
+    if (typeof e === 'string') {
+      e.toLowerCase();
+    } else if (e instanceof Error) {
+      e.message;
     }
   }
 }
 
-const userMax = new User('Max', 24);
-userMax.getUserName('Ivanoff'); // Имя пользователя: Max Ivanoff
+const str: any = 'sdfsdf';
+str.map((e: number) => e.toFixed());
 
-class UserAdmin<T> extends User<string, string> {
-  role: T;
-  name: string;
-  age: string;
-
-  constructor(name: string, age: string, role: T) {
-    super(name, age);
-
-    this.name = name;
-    this.age = age;
-    this.role = role;
-  }
-}
-
-new UserAdmin();
+const str2: unknown;
