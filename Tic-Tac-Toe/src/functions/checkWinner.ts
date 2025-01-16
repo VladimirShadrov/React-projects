@@ -21,36 +21,23 @@ export function checkWinner<T>(cellData: T[]) {
 
 // ===============================
 
-interface User {
-  name: string;
-  age: number;
-  sayHello: (name: string) => void;
-}
-
-interface Role {
-  role: string;
-}
-
-interface UserWithRoleAndGender extends User, Role {
-  gender: string;
-}
-
-interface IUser {
-  [key: string]: string;
-}
-
-const user: UserWithRoleAndGender = {
-  age: 24,
-  gender: 'male',
-  name: 'Sam',
-  role: 'user',
-  sayHello: (name) => console.log(`Hello, ${name}`),
+type Currencies = {
+  russia: 'rur';
+  usa: 'usd';
+  belarus: 'rub';
+  china: 'cny';
 };
 
-user.sayHello(user.name);
+type CurBaseType = 'rus' | 'usa' | 'china' | 'belarus';
 
-const user2: IUser = {
-  name: 'Sam',
-  age: '24',
-  gender: 'male',
-};
+type NoUSA = Omit<Currencies, 'usa'>;
+type OnlyRussia = Pick<Currencies, 'russia'>;
+
+type NoUSAType = Exclude<CurBaseType, 'usa'>;
+type NoUSAInterface = Exclude<keyof Currencies, 'usa'>;
+
+type OnlyRusType = Extract<CurBaseType, 'rus'>;
+type OnlyRusType = Extract<keyof Currencies, 'russia'>;
+
+type P = Partial<Currencies>;
+type RO = Readonly<Currencies>;
