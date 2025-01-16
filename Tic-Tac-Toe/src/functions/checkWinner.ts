@@ -21,20 +21,23 @@ export function checkWinner<T>(cellData: T[]) {
 
 // ===============================
 
-async function foo() {
-  try {
-    const resp = await fetch('');
-    const data = await resp.json();
-  } catch (e: unknown) {
-    if (typeof e === 'string') {
-      e.toLowerCase();
-    } else if (e instanceof Error) {
-      e.message;
-    }
+function myNever(data: boolean): string {
+  if (data === true) {
+    return 'true';
+  } else if (data === false) {
+    return 'false';
+  } else {
+    data;
+    return '';
   }
 }
 
-const str: any = 'sdfsdf';
-str.map((e: number) => e.toFixed());
+const btn = document.querySelector('.button');
 
-const str2: unknown;
+if (btn) {
+  btn.addEventListener('click', () => {});
+} else if (btn === null) {
+  throw new Error('Button not exist', btn);
+} else {
+  btn;
+}
