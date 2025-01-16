@@ -21,30 +21,48 @@ export function checkWinner<T>(cellData: T[]) {
 
 // ===============================
 
-function printMessage(msg: string[] | string | boolean | number): void {
-  if (isStringArray(msg)) {
-    msg.forEach((msg) => console.log(msg));
-  } else if (isString(msg)) {
-    console.log(msg);
-  } else if (isBoolean(msg)) {
-    console.log(msg);
-  } else if (isNumber(msg)) {
-    console.log(msg.toString());
+type Values = number | string | boolean;
+
+function getValueType(val: Values): Values {
+  if (typeof val === 'number') {
+    return val.toFixed();
+  } else if (typeof val === 'string') {
+    return val.toLowerCase();
+  } else {
+    return val;
   }
 }
 
-function isStringArray(arr: unknown): arr is string[] {
-  return Array.isArray(arr) && arr.every((item) => typeof item === 'string');
+type UserNames = 'Alex' | 'Sam';
+
+function getName(name: UserNames): void {
+  console.log(name);
 }
 
-function isString(msg: unknown): msg is string {
-  return typeof msg === 'string';
-}
+getName('Sam');
 
-function isBoolean(msg: unknown): msg is boolean {
-  return typeof msg === 'boolean';
-}
+type User = {
+  name: string;
+  age: number;
+  sayHello: (name: string) => void;
+};
 
-function isNumber(msg: unknown): msg is number {
-  return typeof msg === 'number';
-}
+type Gender = {
+  gender: string;
+};
+
+type Role = {
+  role: string;
+};
+
+type UserWithRoleAndGender = User & Gender & Role;
+
+const user: UserWithRoleAndGender = {
+  age: 23,
+  gender: 'male',
+  name: 'Alex',
+  role: 'Admin',
+  sayHello: (name: string) => console.log(`Hello, ${name}`),
+};
+
+user.sayHello(user.name);
