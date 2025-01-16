@@ -21,48 +21,36 @@ export function checkWinner<T>(cellData: T[]) {
 
 // ===============================
 
-type Values = number | string | boolean;
-
-function getValueType(val: Values): Values {
-  if (typeof val === 'number') {
-    return val.toFixed();
-  } else if (typeof val === 'string') {
-    return val.toLowerCase();
-  } else {
-    return val;
-  }
-}
-
-type UserNames = 'Alex' | 'Sam';
-
-function getName(name: UserNames): void {
-  console.log(name);
-}
-
-getName('Sam');
-
-type User = {
+interface User {
   name: string;
   age: number;
   sayHello: (name: string) => void;
-};
+}
 
-type Gender = {
-  gender: string;
-};
-
-type Role = {
+interface Role {
   role: string;
-};
+}
 
-type UserWithRoleAndGender = User & Gender & Role;
+interface UserWithRoleAndGender extends User, Role {
+  gender: string;
+}
+
+interface IUser {
+  [key: string]: string;
+}
 
 const user: UserWithRoleAndGender = {
-  age: 23,
+  age: 24,
   gender: 'male',
-  name: 'Alex',
-  role: 'Admin',
-  sayHello: (name: string) => console.log(`Hello, ${name}`),
+  name: 'Sam',
+  role: 'user',
+  sayHello: (name) => console.log(`Hello, ${name}`),
 };
 
 user.sayHello(user.name);
+
+const user2: IUser = {
+  name: 'Sam',
+  age: '24',
+  gender: 'male',
+};
