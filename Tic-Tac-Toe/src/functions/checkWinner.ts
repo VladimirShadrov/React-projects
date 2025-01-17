@@ -20,34 +20,3 @@ export function checkWinner<T>(cellData: T[]) {
 }
 
 // ===============================
-
-// нужно реализовать generic тип CustomRequiredByKeys
-// данный тип похож на встроенный тип Required, с тем отличием, что Required делает обязательными все поля,
-// а CustomRequiredByKeys только те, которые перечислены во втором аргументе, остальные поля должны остаться без изменений
-
-// TODO шаблон который нужно изменить
-type CustomRequiredByKeys = any;
-
-// вариант применения CustomRequiredByKeys
-type SelectProps = {
-  value?: string;
-  size?: string;
-  options?: string[];
-};
-
-type SelectPropsWithRequiredFields = CustomRequiredByKeys<SelectProps, 'value' | 'size'>;
-
-// компилятор должен выдать ошибку для полей value и size, так как они должны быть обязательными
-const props: SelectPropsWithRequiredFields = {
-  options: undefined, // тут ошибки быть не должно
-  value: undefined, // тут должна быть ошибка
-  size: undefined, // тут должна быть ошибка
-};
-
-const map = (array, callback) => {
-  array.forEach((el, index, arr) => {
-    result.push(callback(el, index, arr));
-  });
-
-  return result;
-};
