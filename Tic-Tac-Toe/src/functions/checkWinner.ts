@@ -20,4 +20,3 @@ export function checkWinner<T>(cellData: T[]) {
 }
 
 // ===============================
-console.log(1);
