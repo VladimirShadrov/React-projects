@@ -20,18 +20,4 @@ export function checkWinner<T>(cellData: T[]) {
 }
 
 // ===============================
-
-type CB<T, U> = (el: T, index: number, array: T[]) => U;
-
-const map = <T, U>(array: T[], callback: CB<T, U>): U[] => {
-  const result: U[] = [];
-  array.forEach((el, index, arr) => {
-    result.push(callback(el, index, arr));
-  });
-
-  return result;
-};
-
-const arr: number[] = [1, 2, 3];
-
-const res = map(arr, (item) => item + '1');
+console.log(1);
